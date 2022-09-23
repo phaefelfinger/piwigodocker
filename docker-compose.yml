@@ -1,0 +1,41 @@
+---
+version: "3.1"
+services:
+  piwigo:
+    image: lscr.io/linuxserver/piwigo:latest
+    depends_on:
+      - db
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Zurich
+    volumes:
+      - ./config:/config
+      - ./gallery:/gallery
+    ports:
+      - 8080:80
+    restart: unless-stopped
+
+  db:
+    image: mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: piwigo
+      MARIADB_USER: piwigo
+      MARIADB_PASSWORD: Asdfqwer1234
+      MARIADB_ROOT_PASSWORD: Qwerasdf1234
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - ./mariadb:/var/lib/mysql
+
+# a little admin gui for mariadb / mysql
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8081:8080
