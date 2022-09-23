@@ -24,6 +24,7 @@ services:
       MARIADB_USER: piwigo
       MARIADB_PASSWORD: Asdfqwer1234
       MARIADB_ROOT_PASSWORD: Qwerasdf1234
+# We do expose the database to make access and checking the data quite easy
     ports:
       - 3306:3306
     expose:
