@@ -9,7 +9,7 @@ To start a working piwigo gallery run the following commands:
 ```
 git clone https://git.haefelfinger.net/piwigo/piwigodocker.git
 cd piwigodocker
-docker-compose up -d
+docker compose up -d
 ```
 
 All files gets created within the cloned directory and can be accessed easily from the host machine.
@@ -25,7 +25,7 @@ To stop the setup:
 
 ```
 cd piwigodocker
-docker-compose down
+docker compose down
 ```
 
 Stopping will remove the network and the containers but will keep the data in the folders below ``piwigodocker``.
@@ -36,7 +36,7 @@ To start the installation again, you just execute the up command again. As all d
 
 ```
 cd piwigodocker
-docker-compose down
+docker compose up -d
 ```
 
 ## Access adminer
