@@ -15,6 +15,9 @@ services:
     ports:
       - 8080:80
       - 8443:443
+    networks:
+      - public
+      - default
     restart: unless-stopped
 
   db:
@@ -25,11 +28,8 @@ services:
       MARIADB_USER: piwigo
       MARIADB_PASSWORD: Asdfqwer1234
       MARIADB_ROOT_PASSWORD: Qwerasdf1234
-# We do expose the database to make access and checking the data quite easy
-    ports:
-      - 3306:3306
-    expose:
-      - 3306
+    networks:
+      - default
     volumes:
       - ./mariadb:/var/lib/mysql
 
@@ -41,3 +41,13 @@ services:
 #      - db
 #    ports:
 #      - 8081:8080
+#    networks:
+#      - public
+#      - default
+
+# make sure the public network uses the bridge
+# to be available on localhost on windows as well
+networks:
+  default:
+  public:
+    driver: bridge
